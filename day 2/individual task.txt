@@ -1,0 +1,17 @@
+Answer 1:
+setImmediate  doesn't use queue of functions. It checks queue of I/O eventhandlers. If all I/O events in the current snapshot are processed, it executes the callback. it is faster than setTimeout.
+
+Answer 2:
+process.nextTick is npt the part of event loop and it is faster than setImmediate.
+
+Answer 3: 10 core module
+buffer,
+console,
+console,
+http,
+querystring,
+stream,
+url,
+v8,
+zlib,
+process
