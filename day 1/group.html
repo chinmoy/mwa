@@ -8,16 +8,43 @@ String.prototype.filterWords=function(str){
 }
 console.log("This house is nice. test....".filterWords(["house","nice","test"]));
 
+console.log("Solution 2 and 3: promise and async\n");
+String.prototype.filterWordsprom= function(str){
+  var str1 = this.split(" ");
+  function mypromise() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const map1 = str1.map(x =>{ if(str.includes(x)) {return "*";} else {return x;} });
+
+        resolve(map1.join(' '));
+      }, 100);
+    });
+  }
+
+  async function asyncCall() {
+    console.log('Hello');
+    const result = await mypromise();
+    console.log(result);
+  }
+
+  asyncCall();
+
+
+
+}
+console.log("This house is nice. test".filterWordsprom(["house","nice","test"]));
+
 console.log("Solution 4: Observeable\n");
 const data="test aaa sss ddd"
 const {from,of}=rxjs;
-const {map,filter,flatMap }=rxjs.operators;
+const {map,filter,reduce}=rxjs.operators;
 
 String.prototype.filterWordsOb=function(str){   
     var str1 = this.split(" ");   
     from(str1)
     .pipe(
-        map((obj)=>str.includes(obj)?"***":obj)
+        map((obj)=>str.includes(obj)?"***":obj),
+        reduce((acc, obj) => acc +" "+ obj)
     )
     .subscribe(
         (obj)=>console.log(obj)
