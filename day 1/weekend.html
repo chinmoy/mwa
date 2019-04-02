@@ -1,0 +1,24 @@
+<script>
+    function isWeekend(){
+        const todayDate=new Date();
+        const day =todayDate.getDate();
+        const WeekMap=["weekend","weekday","weekday","weekday","weekday","weekday","weekend"];
+        console.log(WeekMap[day]);
+    }
+    isWeekend();
+
+   const item={
+       "name":"Avocado",
+       "type":"Fruit",
+       "category":"Food",
+       "price":200
+       
+   }
+   function applyCoupon(item){
+      return function(discount){
+         item.price= item.price-item.price*discount/100;
+         return item;
+       }
+   }
+   console.log(applyCoupon(item)(10).price);
+</script>

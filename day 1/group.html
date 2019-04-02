@@ -1,0 +1,28 @@
+<script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+console.log("Solution 1: Prototype\n");
+String.prototype.filterWords=function(str){   
+    var str1 = this.split(" ");   
+    str1= str1.map(x=>str.includes(x)?"***":x);  
+    return str1.join(" ");
+}
+console.log("This house is nice. test....".filterWords(["house","nice","test"]));
+
+console.log("Solution 4: Observeable\n");
+const data="test aaa sss ddd"
+const {from,of}=rxjs;
+const {map,filter,flatMap }=rxjs.operators;
+
+String.prototype.filterWordsOb=function(str){   
+    var str1 = this.split(" ");   
+    from(str1)
+    .pipe(
+        map((obj)=>str.includes(obj)?"***":obj)
+    )
+    .subscribe(
+        (obj)=>console.log(obj)
+    )
+}
+
+console.log("This house is nice. test....".filterWordsOb(["house","nice","test"]));
+</script>
