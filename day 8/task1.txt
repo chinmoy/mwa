@@ -1,3 +1,4 @@
+
 mongoimport --host mwa-shard-00-01-xdjlp.mongodb.net:27017  --ssl --username chinmoy --password mwa --authenticationDatabase admin --db restaurant --collection location --type json --file "C:\Users\USER\Downloads\restaurants\restaurants.json"
 
 use restaurant
@@ -10,6 +11,17 @@ use restaurant
 6. db.location.find({district:"Bronx"},{_id:0,restaurant_id:1,name:1,district:1,"address.zipcode":1}).limit(5)
 7. db.location.find({district:"Bronx"},{_id:0,restaurant_id:1,name:1,district:1,"address.zipcode":1}).skip(5).limit(5)
 8. db.location.find({"address.coord":{$lt:-95.754168}},{_id:0,restaurant_id:1,name:1,district:1,"address.coord":1})
+8. db.location.find({"address.coord":{elemMatch:{$lt:-95.754168}},{_id:0,restaurant_id:1,name:1,district:1,"address.coord":1})
 9. db.location.find({$and: [ {"cuisine":"American"},{"grades.score":70},{"address.coord":{$lt:-65.754168}} ]},{_id:0,restaurant_id:1,name:1,cuisine:1,"grades.score":1})
 10. db.location.find({"name":{$regex:"^Wil"}},{_id:0,restaurant_id:1,name:1,cuisine:1,"grades.score":1})
 11. db.location.find({"name":{$regex:"ces$"}},{_id:0,restaurant_id:1,name:1,cuisine:1,"grades.score":1})
+12. db.location.find({"name":{$regex:"Reg"}},{_id:0,restaurant_id:1,name:1,cuisine:1,"grades.score":1})
+13. db.location.find({$and: [{district:"Bronx"}, {$or: [{"cuisine":"Chinese"},{"cuisine":"American "}]}]},{_id:0,restaurant_id:1,name:1,district:1,cuisine:1})
+14. db.location.find({$or: [{district:"Bronx"}, {district:"Queens"},{district:"Brooklyn"},{district:"Staten Island"}]},{_id:0,restaurant_id:1,name:1,district:1,cuisine:1})
+15. db.location.find({district: {$nin:["Bronx","Queens","Brooklyn","Staten Island"]}},{_id:0,restaurant_id:1,name:1,district:1,cuisine:1})
+16. db.location.find({"grades.score": {$lt:10}},{_id:0,restaurant_id:1,name:1,district:1,"grades.score":1})
+17. db.location.find({"address.coord":{$elemMatch:{$lt:52,$gt:42}}},{_id:0,restaurant_id:1,name:1,district:1,"address.coord":1})
+18. db.location.find({},{_id:0,restaurant_id:1,name:1,district:1,cuisine:1}).sort({"name":1})
+19. db.location.find({},{_id:0,restaurant_id:1,name:1,district:1,cuisine:1}).sort({"name":-1})
+20. db.location.find({},{_id:0,name:1,cuisine:1,district:1,restaurant_id:1}).sort({"cuisine":1,"district":-1})
+21. db.location.find({"address.street":{$exists:true}},{_id:0,name:1,cuisine:1,district:1,restaurant_id:1})
