@@ -1,0 +1,8 @@
+
+POST http://localhost:3000/grades
+content-type: application/json
+
+{
+    "grade": "40",
+    "course": "cs507"
+}
